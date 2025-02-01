@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "VPN-PROXY",
+  "description": "Proxy server",
+  "version": "1.0",
+  "action": {
+    "default_popup": "hello.html",
+    "default_icon": "static/icon.png"
+  }
+}
