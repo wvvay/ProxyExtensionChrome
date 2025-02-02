@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>VPN-PROXY</title>
+</head>
+<body>
+<h1>VPN-PROXY</h1>
+
+<button id="toggleProxy" class="off">Включить прокси</button>
+
+<div class="container">
+    <h2>Текущий прокси</h2>
+    <p id="currentProxy">Не установлен</p>
+</div>
+
+<div class="container">
+    <h2>Настройки прокси</h2>
+    <input type="text" id="proxyHost" placeholder="IP или домен">
+    <input type="number" id="proxyPort" placeholder="Порт">
+    <button id="saveProxy">Сохранить прокси</button>
+</div>
+
+<div class="container">
+    <h2>Сайты через прокси</h2>
+    <input type="text" id="siteInput" placeholder="example.com">
+    <button id="addSite">Добавить сайт</button>
+    <ul id="siteList">
+        <li>
+            example.com
+            <button class="remove-btn"></button>
+        </li>
+    </ul>
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>

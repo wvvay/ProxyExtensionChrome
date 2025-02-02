@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    width: 280px;
+    padding: 15px;
+    background: linear-gradient(135deg, #2b5876, #4e4376);
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+}
+
+h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 5px;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+
+/* Стиль для выключенного прокси */
+#toggleProxy.off {
+    background: #28a745;
+    color: white;
+}
+
+#toggleProxy.off:hover {
+    background: #218838;
+}
+
+/* Стиль для включенного прокси */
+#toggleProxy.on {
+    background: #dc3545;
+    color: white;
+}
+
+#toggleProxy.on:hover {
+    background: #c82333;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+}
+
+input {
+    width: 94%;
+    padding: 8px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+#siteList {
+    list-style: none;
+    padding: 0;
+}
+
+#siteList li {
+    background: rgba(255, 255, 255, 0.2);
+    margin: 5px 0;
+    padding: 6px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Кнопка удаления */
+.remove-btn {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    width: 20px; /* Фиксированная ширина */
+    height: 20px; /* Фиксированная высота */
+    border-radius: 100%; /* Круглая форма */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0;
+}
