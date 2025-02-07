@@ -2,11 +2,13 @@
   "name": "VPN-PROXY",
   "version": "1.0",
   "manifest_version": 3,
+  "description": "Расширение для управления прокси-настройками браузера.",
   "permissions": [
     "proxy",
     "storage",
-    "tabs",
-    "declarativeNetRequest"
+    "webRequest",
+    "webRequestAuthProvider",
+    "tabs"
   ],
   "host_permissions": [
     "<all_urls>"

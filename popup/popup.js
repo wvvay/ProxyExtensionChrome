@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const saveBtn = document.getElementById("saveProxy");
     const addSiteBtn = document.getElementById("addSite");
 
-    // Загружаем сохраненные настройки
     chrome.storage.local.get(["proxySettings", "proxyEnabled", "proxySites"], (data) => {
         if (data.proxySettings) {
             document.getElementById("proxyHost").value = data.proxySettings.host || "";
@@ -20,14 +19,19 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Включение/выключение прокси
+    //Включить/выключить
     toggleBtn.addEventListener("click", () => {
-        chrome.storage.local.get("proxyEnabled", (data) => {
+        chrome.storage.local.get(["proxyEnabled", "proxySettings"], (data) => {
             const newState = !data.proxyEnabled;
             chrome.storage.local.set({ proxyEnabled: newState }, () => {
                 toggleBtn.textContent = newState ? "Выключить прокси" : "Включить прокси";
                 toggleBtn.classList.toggle("off", !newState);
-                chrome.runtime.sendMessage({ action: newState ? "enableProxy" : "disableProxy" });
+
+                if (newState && data.proxySettings) {
+                    chrome.runtime.sendMessage({ action: "updateProxy", proxySettings: data.proxySettings });
+                } else {
+                    chrome.runtime.sendMessage({ action: "disableProxy" });
+                }
             });
         });
     });
@@ -43,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         chrome.storage.local.set({ proxySettings }, () => {
             document.getElementById("currentProxy").textContent = `${proxySettings.host}:${proxySettings.port}`;
-            chrome.runtime.sendMessage({ action: "updateProxy", proxySettings });
+            console.log("Настройки прокси сохранены, но не активированы.");
         });
     });
 
