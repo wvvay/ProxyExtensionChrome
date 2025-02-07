@@ -21,20 +21,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //Включить/выключить
     toggleBtn.addEventListener("click", () => {
-        chrome.storage.local.get(["proxyEnabled", "proxySettings"], (data) => {
+        chrome.storage.local.get(["proxyEnabled", "proxySettings", "proxySites"], (data) => {
             const newState = !data.proxyEnabled;
             chrome.storage.local.set({ proxyEnabled: newState }, () => {
                 toggleBtn.textContent = newState ? "Выключить прокси" : "Включить прокси";
                 toggleBtn.classList.toggle("off", !newState);
 
                 if (newState && data.proxySettings) {
-                    chrome.runtime.sendMessage({ action: "updateProxy", proxySettings: data.proxySettings });
+                    chrome.runtime.sendMessage({
+                        action: "updateProxy",
+                        proxySettings: data.proxySettings,
+                        proxySites: data.proxySites || []
+                    });
                 } else {
                     chrome.runtime.sendMessage({ action: "disableProxy" });
                 }
             });
         });
     });
+
 
     // Сохранение прокси
     saveBtn.addEventListener("click", () => {
