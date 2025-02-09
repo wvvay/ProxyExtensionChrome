@@ -52,7 +52,7 @@
 
 1. Открываем конфигурационный файл Squid для редактирования:
 
-    ```bash
+    ```
     sudo nano /etc/squid/squid.conf
     ```
 
@@ -62,7 +62,7 @@
 
 Добавьте следующие строки, чтобы указать, какие сети разрешены для доступа (по умолчанию — локальная сеть):
 
-    ```bash
+    
     acl localnet src 0.0.0.1-0.255.255.255
     acl localnet src 10.0.0.0/8
     acl localnet src 100.64.0.0/10
@@ -71,11 +71,11 @@
     acl localnet src 192.168.0.0/16
     acl localnet src fc00::/7
     acl localnet src fe80::/10
-    ```
+    
 
 ### Определение безопасных портов
 
-    ```bash
+    
     acl SSL_ports port 443
     acl Safe_ports port 80
     acl Safe_ports port 21
@@ -87,61 +87,60 @@
     acl Safe_ports port 488
     acl Safe_ports port 591
     acl Safe_ports port 777
-    ```
+    
 
 ### Запрет на небезопасные порты
 
-    ```bash
+    
     http_access deny !Safe_ports
     http_access deny CONNECT !SSL_ports
-    ```
+    
 
 ### Доступ к `cachemgr` только с локального хоста
 
-    ```bash
+    
     http_access allow localhost manager
     http_access deny manager
-    ```
+    
 
 ### Разрешить локальный доступ
 
-    ```bash
+    
     http_access allow localhost
-    ```
+    
 
 ### Настройка аутентификации
 
 1. Настройка аутентификации через логин/пароль:
 
-    ```bash
+    ```
     auth_param basic program /usr/lib/squid/basic_ncsa_auth /etc/squid/passwd
     auth_param basic realm Proxy
     auth_param basic credentialsttl 2 hours
     acl auth_users proxy_auth REQUIRED
     http_access allow auth_users
-    ```
 
 ### Запрещаем всех остальных пользователей
 
-    ```bash
+    
     http_access deny all
-    ```
+    
 
 ### Настройка порта для работы Squid
 
-    ```bash
+    
     http_port 8888
-    ```
+    
 
 ### Установка директории для дампов
 
-    ```bash
+    
     coredump_dir /var/spool/squid
-    ```
+    
 
 ### Паттерны обновления кеша
 
-    ```bash
+    
     refresh_pattern ^ftp:           1440    20%     10080
     refresh_pattern ^gopher:        1440    0%      1440
     refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
@@ -152,7 +151,7 @@
     # example pattern for deb packages
     #refresh_pattern (\.deb|\.udeb)$   129600 100% 129600
     refresh_pattern .               0       20%     4320
-    ```
+    
 
 ## Шаг 7: Перезапуск Squid
 
