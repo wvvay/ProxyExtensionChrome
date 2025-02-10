@@ -66,5 +66,26 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         });
         proxyUsername = "";
         proxyPassword = "";
+
+        // Очищаемcookies
+        chrome.browsingData.remove({
+            "since": 0 // Очищаем все данные с момента первого использования браузера
+        }, {
+                "cookies": true,
+    //          "cache": true,
+    //          "history": true,
+    //          "formData": true,
+    //          "passwords": true,
+    //          "downloads": true,
+    //          "localStorage": true
+        }, function() {
+            console.log("Куки очищен.");
+        });
+
+//        // Дополнительно очищаем сохраненные данные авторизации
+//        chrome.storage.local.remove(['proxyUsername', 'proxyPassword'], function() {
+//            console.log("Данные авторизации очищены.");
+//        });
+
     }
 });
